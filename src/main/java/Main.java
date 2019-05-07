@@ -22,7 +22,7 @@ public class Main {
         System.out.println("p = " + rsa.getP());
         System.out.println("q = " + rsa.getQ());
         System.out.println("n = " + rsa.getN());
-        System.out.println("fi(" + rsa.getN() + ") = " + rsa.getFin());
+        System.out.println("fi(n) = " + rsa.getFin());
         System.out.println("e = " + rsa.getE());
         System.out.println("d = " + rsa.getD());
 
@@ -30,21 +30,21 @@ public class Main {
 
         try {
             BigInteger number = BigInteger.valueOf(2019);
-            BigInteger encryptedNumber = rsa.encrypt(number);
-            BigInteger decryptedNumber = rsa.decrypt(encryptedNumber);
             System.out.println("Number = " + number);
+            BigInteger encryptedNumber = rsa.encrypt(number);
             System.out.println("Number encrypted = " + encryptedNumber);
+            BigInteger decryptedNumber = rsa.decrypt(encryptedNumber);
             System.out.println("Number decrypted = " + decryptedNumber);
 
             System.out.println("");
 
             String text = "Lorem ipsum dolor sit amet";
-            List<BigInteger> encryptedText = rsa.encryptText(text);
-            String decryptedText = rsa.decryptText(encryptedText);
             System.out.println("Text = " + text);
+            List<BigInteger> encryptedText = rsa.encryptText(text);
             System.out.println("Text encrypted = ");
             for (BigInteger bi : encryptedText)
                 System.out.println(bi);
+            String decryptedText = rsa.decryptText(encryptedText);
             System.out.println("Text decrypted = " + decryptedText);
 
         } catch (Exception e) {
