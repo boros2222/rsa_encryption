@@ -63,10 +63,14 @@ public class RSA {
     }
 
     public BigInteger getPrivateExponent() {
-        BigInteger d = BigInteger.valueOf(2);
-        while(e.multiply(d).mod(fin).compareTo(BigInteger.ONE) != 0) {
-            d = d.add(BigInteger.ONE);
+        BigInteger szorzo = BigInteger.ONE;
+        BigInteger szorzat = szorzo.multiply(this.fin).add(BigInteger.ONE);
+
+        while(!szorzat.mod(this.e).equals(BigInteger.ZERO)) {
+            szorzo = szorzo.add(BigInteger.ONE);
+            szorzat = szorzo.multiply(this.fin).add(BigInteger.ONE);
         }
+        BigInteger d = szorzat.divide(this.e);
 
         return d;
     }
@@ -108,6 +112,8 @@ public class RSA {
         }
 
         return result.mod(mod);
+
+        //return base.modPow(exponent, mod);
     }
 
     public List<Boolean> toBinaryList(BigInteger number) {
